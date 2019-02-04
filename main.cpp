@@ -14,9 +14,9 @@ void testCvText();
 
 int main( int argc, char** argv )
 {
+    testCvText();
     testCompareMats();
     testSaveMat();
-    testCvText();
     return 0;
 }
 
@@ -75,6 +75,8 @@ void testCvText() {
     Point pos(5,25);                   //输出起始位置
     Scalar color(255,255,255);         //字的颜色，默认为白色
     text.putText(mat,str,pos,color);
+	imshow("汉字", mat);
+	cv::waitKey(0);
 //    imwrite("CvText.bmp",mat);
     Mat base = imread("CvText.bmp");
     CompareMats cm(base,mat);

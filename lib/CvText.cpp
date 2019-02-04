@@ -2,6 +2,8 @@
 #include <clocale>
 #include <cctype>
 #include <utility>
+ #include <opencv2/core/types_c.h>
+    #include <opencv2/videoio/videoio_c.h>
 #include "tools.h"
 #include "CvText.h"
 
@@ -21,10 +23,12 @@ CvText::CvText(const char *fontName,TextEncoding encoding) {
         case UTF8:
             FT_Select_Charmap(m_face,FT_ENCODING_UNICODE);
             m_textEncoding = "zh_CN.utf8";
+            m_textEncoding = "zh_CN.UTF-8";
             break;
         case GB2312:
             FT_Select_Charmap(m_face,FT_ENCODING_GB2312);
             m_textEncoding = "zh_CN.gb2312";
+            m_textEncoding = "zh_CN.GB2312";
             break;
         default:
             ASSERT(false, "不支持的文本编码");
@@ -151,7 +155,7 @@ void CvText::putWChar(cv::Mat &frame, wchar_t wc, cv::Point &pos, cv::Scalar col
                 int c = pos.x + j;
 
                 if (r >= 0 && r < img.height && c >= 0 && c < img.width) {
-                    CvScalar scalar = cvGet2D(&img, r, c);
+					cv::Scalar scalar = cvGet2D(&img, r, c);
 
                     // 进行色彩融合
                     float p = m_fontDiaphaneity;

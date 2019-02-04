@@ -26,7 +26,7 @@ CompareMats::CompareMats(const cv::Mat mat0, const cv::Mat mat1) :
             _mask = mat0.clone();
             break;
         case CV_8UC4:
-            cvtColor(mat0, _mask, CV_BGRA2BGR);
+            cvtColor(mat0, _mask, COLOR_BGRA2BGR);
             break;
         default:
             _mask = Mat(mat0.size(), CV_8UC3);
